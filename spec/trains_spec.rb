@@ -5,7 +5,7 @@ describe Route do
     @route = Route.new("CDE")
   end
 
-  it 'provides a start (a)' do
+  it 'provides a start' do
     expect(@route.start).to eq 'C'
   end
 
