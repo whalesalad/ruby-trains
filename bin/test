@@ -1,0 +1,58 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../lib"
+
+require 'trains'
+
+def run_tests
+  # The test suite covers unit testing the individual
+  # components in this project.
+
+  # The specific test-run requested for this project
+  # is run here.
+end
+
+def output(idx, value)
+  puts "Output ##{idx}: #{value}"
+end
+
+if __FILE__ == $0
+  graph = Trains.make_graph(STDIN.read)
+
+  distance_tests = [
+    "ABC",
+    "AD",
+    "ADC",
+    "AEBCD",
+    "AED",
+  ].each_with_index do |route, idx|
+    output idx+1, graph.distance(route)
+  end
+
+  six = graph.trips('C', 'C').select { |route| route.max_stops? 3 }.size
+  output 6, six
+
+  seven = graph.trips('A', 'C')
+  output 7, "???"
+  # output 7, seven
+
+  eight = graph.trips('A', 'C').map do |route|
+    { route: route.to_s, distance: graph.distance(route) }
+  end
+
+  eight = eight.sort_by { |route| route[:distance] }.first
+  output 8, eight[:distance]
+
+  nine = graph.trips('B', 'B')
+
+  # .map do |route|
+  #   { route: route.to_s, distance: graph.distance(route) }
+  # end
+  # nine.sort_by { |route| route[:distance] }.first
+
+  output 9, nine
+
+  ten = graph.trips('C', 'C')
+  output 10, ten
+
+end
