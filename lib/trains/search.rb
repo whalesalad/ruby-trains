@@ -49,10 +49,10 @@ module Trains
         # If a child matches, take the current depth, add the child, and save as a path.
         if match? child
           save_path depth + [child]
-        else
-          # but we might still have more...
-          search(child, depth)
         end
+
+        # but we might still have more...
+        search(child, depth)
       end
 
     end

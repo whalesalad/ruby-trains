@@ -1,13 +1,14 @@
 module Trains
   class Route
-    attr_accessor :parts
+    attr_accessor :parts, :distance
 
     def self.from_parts(*parts)
       self.new parts.join
     end
 
-    def initialize(parts)
+    def initialize(parts, distance: nil)
       @parts = parts.split("")
+      @distance = distance
     end
 
     def start

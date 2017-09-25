@@ -29,30 +29,27 @@ if __FILE__ == $0
     output idx+1, graph.distance(route)
   end
 
-  six = graph.trips('C', 'C').select { |route| route.max_stops? 3 }.size
-  output 6, six
+  # The number of trips starting at C and ending at C with a maximum of 3 stops.
+  # In the sample data below, there are two such trips: C­D­C (2 stops). and C­E­B­C (3 stops).
+  six = graph.trips('C', 'C').select { |route| route.max_stops? 3 }
+  output 6, six.size
 
+  # The number of trips starting at A and ending at C with exactly 4 stops.
+  # In the sample data below, there are three such trips:
+  # A to C (via B,C,D); A to C (via D,C,D); and A to C (via D,E,B).
   seven = graph.trips('A', 'C')
   output 7, "???"
-  # output 7, seven
 
-  eight = graph.trips('A', 'C').map do |route|
-    { route: route.to_s, distance: graph.distance(route) }
-  end
+  # The length of the shortest route (in terms of distance to travel) from A to C.
+  eight = graph.trips('A', 'C').sort_by(&:distance).first
+  output 8, eight.distance
 
-  eight = eight.sort_by { |route| route[:distance] }.first
-  output 8, eight[:distance]
+  # The length of the shortest route (in terms of distance to travel) from B to B.
+  nine = graph.trips('B', 'B').sort_by(&:distance).first
+  output 9, nine.distance
 
-  nine = graph.trips('B', 'B')
-
-  # .map do |route|
-  #   { route: route.to_s, distance: graph.distance(route) }
-  # end
-  # nine.sort_by { |route| route[:distance] }.first
-
-  output 9, nine
-
-  ten = graph.trips('C', 'C')
-  output 10, ten
+  # The number of different routes from C to C with a distance of less than 30.
+  ten = graph.trips('C', 'C').select { |route| route.distance < 30 }
+  output 10, ten.size
 
 end

@@ -79,7 +79,7 @@ module Trains
       search = DepthFirstSearch.new(self, start, terminus)
         .paths
         .map { |r| Route.from_parts(r) }
-        # .each { |r| r.distance = graph.distance(r) }
+        .each { |r| r.distance = distance(r) }
     end
   end
 end
