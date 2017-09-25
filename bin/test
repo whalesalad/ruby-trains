@@ -4,21 +4,11 @@ $LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../lib"
 
 require 'trains'
 
-def run_tests
-  # The test suite covers unit testing the individual
-  # components in this project.
-
-  # The specific test-run requested for this project
-  # is run here.
-end
-
 def output(idx, value)
   puts "Output ##{idx}: #{value}"
 end
 
-if __FILE__ == $0
-  graph = Trains.make_graph(STDIN.read)
-
+def test_one_through_five(graph)
   distance_tests = [
     "ABC",
     "AD",
@@ -26,30 +16,57 @@ if __FILE__ == $0
     "AEBCD",
     "AED",
   ].each_with_index do |route, idx|
-    output idx+1, graph.distance(route)
+    output idx+1, graph.distance(route) || 'NO SUCH ROUTE'
   end
+end
 
+def test_six(graph)
   # The number of trips starting at C and ending at C with a maximum of 3 stops.
   # In the sample data below, there are two such trips: C­D­C (2 stops). and C­E­B­C (3 stops).
-  six = graph.trips('C', 'C').select { |route| route.max_stops? 3 }
-  output 6, six.size
 
+  six = graph.trips('C', 'C').select { |route| route.max_stops_of 3 }
+  output 6, six.size
+end
+
+def test_seven(graph)
   # The number of trips starting at A and ending at C with exactly 4 stops.
   # In the sample data below, there are three such trips:
   # A to C (via B,C,D); A to C (via D,C,D); and A to C (via D,E,B).
-  seven = graph.trips('A', 'C')
-  output 7, "???"
+  seven = graph.trips('A', 'C').select { |route| route.exact_stops 4 }
+  output 8, seven.size
+end
 
+def test_eight(graph)
   # The length of the shortest route (in terms of distance to travel) from A to C.
   eight = graph.trips('A', 'C').sort_by(&:distance).first
   output 8, eight.distance
+end
 
+def test_nine(graph)
   # The length of the shortest route (in terms of distance to travel) from B to B.
   nine = graph.trips('B', 'B').sort_by(&:distance).first
   output 9, nine.distance
+end
 
+def test_ten(graph)
   # The number of different routes from C to C with a distance of less than 30.
   ten = graph.trips('C', 'C').select { |route| route.distance < 30 }
   output 10, ten.size
+end
 
+def run_tests(input)
+  # The test suite covers unit testing the individual components in this project.
+  # The specific test-run requested for this project is run here.
+  graph = Trains.make_graph(input)
+
+  test_one_through_five graph
+  test_six graph
+  test_seven graph
+  test_eight graph
+  test_nine graph
+  test_ten graph
+end
+
+if __FILE__ == $0
+  run_tests STDIN.read
 end

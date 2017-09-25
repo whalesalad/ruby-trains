@@ -69,7 +69,7 @@ module Trains
       route_edges = edges_for_route(route)
 
       if not route_edges
-        'NO SUCH ROUTE'
+        nil
       else
         route_edges.map { |e| e.distance }.inject(:+)
       end

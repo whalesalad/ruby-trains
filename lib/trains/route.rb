@@ -23,11 +23,11 @@ module Trains
       parts.each_cons(2)
     end
 
-    def max_stops?(num_stops)
+    def max_stops_of(num_stops)
       parts.size <= num_stops + 1
     end
 
-    def exact_stops?(num_stops)
+    def exact_stops(num_stops)
       parts.size.eql? num_stops + 1
     end
 
