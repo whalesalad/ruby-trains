@@ -1,15 +1,21 @@
 module Trains
   class DepthFirstSearch
-    attr_accessor :graph, :start, :depth, :paths
+    # Uses a depth-first strategy to find all paths in a graph.
+
+    # This is a safe ceiling based on our requirements.
+    MAX_DEPTH = 10
+
+    attr_accessor :graph, :depth, :paths
 
     def initialize(graph, start, terminus)
       @graph = graph
-      @start = start
       @terminus = terminus
       @paths = []
 
       search(start)
     end
+
+    private
 
     def children_for(vertex)
       graph.get_vertex(vertex).neighbors
@@ -20,14 +26,15 @@ module Trains
     end
 
     def search(node, depth=[])
-      if depth.size > 10
-        return
-      end
+      # Prevent infinite recursion.
+      return if depth.size > MAX_DEPTH
 
+      # If we have a match, add our breadcrumbs (depth) unless we're just starting out.
       if match? node
         paths << depth + [node] unless depth.empty?
       end
 
+      # Work down the tree in a recursive fashion
       children_for(node).each do |c|
         search(c, depth+[node])
       end
