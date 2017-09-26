@@ -2,8 +2,7 @@ module Trains
   class DepthFirstSearch
     # Uses a depth-first strategy to find all paths in a graph.
 
-    # This is a safe ceiling based on our requirements.
-    MAX_DEPTH = 10
+    MAX_DEPTH = 10 # safe ceiling based on requirements
 
     attr_accessor :graph, :depth, :paths
 

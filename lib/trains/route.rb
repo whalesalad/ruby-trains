@@ -8,7 +8,7 @@ module Trains
 
     def initialize(parts, distance: nil)
       @parts = parts.split("")
-      @distance = distance
+      @distance = distance.to_i if distance
     end
 
     def start
@@ -23,12 +23,16 @@ module Trains
       parts.each_cons(2)
     end
 
+    def stops
+      parts.size - 1
+    end
+
     def max_stops_of(num_stops)
-      parts.size <= num_stops + 1
+      stops <= num_stops
     end
 
     def exact_stops(num_stops)
-      parts.size.eql? num_stops + 1
+      stops.eql? num_stops
     end
 
     def to_s

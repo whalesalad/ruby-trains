@@ -23,7 +23,6 @@ end
 def test_six(graph)
   # The number of trips starting at C and ending at C with a maximum of 3 stops.
   # In the sample data below, there are two such trips: C­D­C (2 stops). and C­E­B­C (3 stops).
-
   six = graph.trips('C', 'C').select { |route| route.max_stops_of 3 }
   output 6, six.size
 end

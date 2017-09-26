@@ -1,5 +1,5 @@
-require_relative './edge'
 require_relative './route'
+require_relative './edge'
 require_relative './vertex'
 require_relative './search'
 
