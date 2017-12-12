@@ -1,6 +1,6 @@
 # Trains Problem
 
-Hello! This is my Ruby-based solution for the trains problem.
+This is my Ruby-based solution for the [trains problem](PROMPT.md).
 
 
 ### Run the Code
@@ -40,8 +40,3 @@ Due to the time constraints and the specific structure of this assignment, a few
 
 1. I opted for an adjacency list graph representation. With this approach, the `Graph` stores verticies (rail stops, represented by a `Vertex`) and each `Vertex` stores the edges (route+distance between stations) represented by `Edge` object.
 2. I opted to use a depth-first path search to query trips from the graph as opposed to a breadth-first approach due to the limited size of the graph and the simplicity of the connections.
-
-
-Hope you enjoy my approach!
-
-– Michael
