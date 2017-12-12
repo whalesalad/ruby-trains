@@ -54,8 +54,3 @@ For test input 1 through 5, if no such route exists, output 'NO SUCH ROUTE'. Oth
 - Output #8: 9
 - Output #9: 9
 - Output #10: 7
-
-
-### Submit
-
-Please submit here: https://app.greenhouse.io/tests/af30c638eaa3290f843bde58da0cd785
